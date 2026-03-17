@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Battles</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Single-player sea trial</p>
+          <h1>The Battles</h1>
+        </div>
+        <p id="objectiveText" class="objective">
+          Press Enter to load the gunnery test scene.
+        </p>
+      </header>
+
+      <section class="stage-shell">
+        <div class="stage" id="stage">
+          <canvas
+            id="game"
+            width="1280"
+            height="720"
+            aria-label="The Battles game area"
+          ></canvas>
+
+          <div class="overlay" id="menuOverlay">
+            <div class="overlay-card">
+              <p class="eyebrow">Prototype build</p>
+              <h2 id="overlayTitle">Gunnery Trial</h2>
+              <p id="overlayCopy">
+                Learn the ship controls, manage limited ammo, and work through a
+                random drill layout to sink the stationary target ship.
+              </p>
+
+              <div class="overlay-grid">
+                <div>
+                  <h3>Controls</h3>
+                  <ul>
+                    <li><span>W / S</span> or arrow up/down to control speed</li>
+                    <li><span>A / D</span> or arrow left/right to turn</li>
+                    <li><span>Q / E</span> fire port or starboard broadside</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3>Mission</h3>
+                  <ul>
+                    <li>The target ship is anchored and will not move.</li>
+                    <li>Rocks and reefs damage your hull, while buoys mark the safer lane.</li>
+                    <li>Your ship starts with single-shot broadsides and limited ammo.</li>
+                    <li>Touch your home island to reload and the upgrade island to unlock triple-shot volleys.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p class="launch-prompt">Press Enter to start or restart.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <article class="panel" id="captainCard"></article>
+        <article class="panel" id="statusPanel"></article>
+        <article class="panel" id="weaponPanel"></article>
+        <article class="panel log-panel" id="logPanel"></article>
+        <article class="panel controls-panel">
+          <h3>Keys</h3>
+          <p><code>W / S</code> or arrows sail</p>
+          <p><code>A / D</code> or arrows steer</p>
+          <p><code>Q / E</code> broadside</p>
+          <p><code>Enter</code> restart</p>
+        </article>
+        <article class="panel map-panel">
+          <div class="panel-heading">
+            <h3>Sea Chart</h3>
+            <p>Blue is you. Teal reloads, gold upgrades, red/green mark the lane.</p>
+          </div>
+          <canvas id="minimap" width="240" height="160" aria-label="Sea chart"></canvas>
+        </article>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>

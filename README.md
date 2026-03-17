@@ -30,3 +30,46 @@ Across all modes, the world is designed as a large navigable ocean space populat
 Players can create a player profile with a chosen name and potentially visual customization such as ship colors or flags. The overarching goal of the game is to explore the ocean, collect stronger weapons, upgrade ship capabilities, expand fleets, and defeat enemy ships to become the most powerful force on the sea.
 
 The first implementation should focus on establishing the foundational gameplay loop of ship movement, navigation, combat with visible projectiles, environmental hazards, exploration, and weapon collection, while leaving room for future expansion such as additional ship types, new weapons, deeper crew mechanics, and expanded multiplayer systems.
+
+## Current prototype
+
+This repo now includes a playable single-player web test scene built with plain HTML, CSS, and JavaScript using the Canvas API.
+
+### What is implemented
+
+- keyboard-only ship controls
+- one stationary opponent ship as the target
+- randomized drill layouts on each restart
+- rocks and reefs that damage your ship on collision
+- lane markers that show a safer route through hazards
+- home island ammo reloads when touched
+- upgrade island that unlocks triple-shot broadsides
+- visible cannonballs and ship hull damage
+- starting broadsides fire one shot instead of three
+- restartable test scene for steering and combat practice
+- minimap, captain log, and ship status HUD
+
+### Controls
+
+- `W` / `S` or `Up` / `Down`: throttle forward / reverse
+- `A` / `D` or `Left` / `Right`: turn
+- `Q` / `E`: fire port / starboard broadside
+- `Enter`: start or restart
+
+### Drill loop
+
+- start with single-shot broadsides and limited ammo
+- follow buoy markers to weave through hazards
+- touch the home island dock zone to refill ammo instantly
+- touch the upgrade island dock zone to unlock three-shot broadsides
+- sink the stationary target ship
+
+### How to run
+
+You can open `index.html` directly in a browser, or serve the folder locally:
+
+```bash
+python3 -m http.server
+```
+
+Then visit `http://localhost:8000`.
