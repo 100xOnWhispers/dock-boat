@@ -1,0 +1,9 @@
+{
+  "name": "thebattles",
+  "private": true,
+  "version": "0.1.0",
+  "description": "LAN multiplayer prototype for The Battles",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

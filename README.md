@@ -31,11 +31,15 @@ Players can create a player profile with a chosen name and potentially visual cu
 
 The first implementation should focus on establishing the foundational gameplay loop of ship movement, navigation, combat with visible projectiles, environmental hazards, exploration, and weapon collection, while leaving room for future expansion such as additional ship types, new weapons, deeper crew mechanics, and expanded multiplayer systems.
 
-## Current prototype
+## Current prototypes
 
-This repo now includes a playable single-player web test scene built with plain HTML, CSS, and JavaScript using the Canvas API.
+This repo now has two playable web modes built with plain HTML, CSS, JavaScript, and a small Node server for LAN play.
 
-### What is implemented
+### 1. Single-player drill
+
+The original test scene is still available at `index.html`.
+
+Implemented:
 
 - keyboard-only ship controls
 - one stationary opponent ship as the target
@@ -46,30 +50,95 @@ This repo now includes a playable single-player web test scene built with plain 
 - upgrade island that unlocks triple-shot broadsides
 - visible cannonballs and ship hull damage
 - starting broadsides fire one shot instead of three
-- restartable test scene for steering and combat practice
 - minimap, captain log, and ship status HUD
 
-### Controls
+Controls:
 
 - `W` / `S` or `Up` / `Down`: throttle forward / reverse
 - `A` / `D` or `Left` / `Right`: turn
 - `Q` / `E`: fire port / starboard broadside
 - `Enter`: start or restart
 
-### Drill loop
-
-- start with single-shot broadsides and limited ammo
-- follow buoy markers to weave through hazards
-- touch the home island dock zone to refill ammo instantly
-- touch the upgrade island dock zone to unlock three-shot broadsides
-- sink the stationary target ship
-
-### How to run
-
-You can open `index.html` directly in a browser, or serve the folder locally:
+Quick run:
 
 ```bash
 python3 -m http.server
 ```
 
-Then visit `http://localhost:8000`.
+Then open `http://localhost:8000/index.html`.
+
+### 2. LAN multiplayer prototype
+
+The main app is now a LAN multiplayer battle page served by `server.js`.
+
+Implemented:
+
+- host-created lobby with configurable max player count
+- other devices on the same local network can join by IP and port
+- larger multiplayer map named `Twin Relay`
+- two community reload islands that instantly refill ammo for any ship
+- faster ship movement than the single-player drill
+- server-authoritative ship movement, cannon fire, collisions, and win state
+- WebSocket transport for live multiplayer updates
+- reconnect support if a player refreshes the browser during the same session
+- keyboard-only controls, HUD, captain log, and minimap
+- root URL `/` serves the multiplayer page
+- single-player drill remains available at `/index.html`
+
+### Hosting the LAN server
+
+Requirements:
+
+- Node.js installed on the host machine
+- all players on the same local network
+
+Start the server from the repo root:
+
+```bash
+npm start
+```
+
+Or without npm:
+
+```bash
+node server.js
+```
+
+Default address:
+
+- local machine: `http://localhost:8080`
+- other devices: use the `LAN URL` printed in the terminal, for example `http://192.168.1.181:8080`
+
+If you want a different port:
+
+```bash
+node server.js 9000
+```
+
+Then other devices would join with `http://<host-lan-ip>:9000`.
+
+If your OS asks whether Node is allowed to accept incoming network connections, allow it for your local network. Otherwise other devices will not be able to connect.
+
+### Multiplayer flow
+
+1. On the host machine, run `node server.js` or `npm start`.
+2. Open the printed URL in a browser on the host machine.
+3. Create the lobby and set the max number of players.
+4. On other devices, open the same LAN URL shown in the host terminal.
+5. Each player joins with a captain name.
+6. The host starts the match once everyone is in.
+
+### Multiplayer controls
+
+- `W` / `S` or `Up` / `Down`: throttle forward / reverse
+- `A` / `D` or `Left` / `Right`: turn
+- `Q` / `E`: fire port / starboard broadside
+- sail into either teal dock ring to reload ammunition instantly
+
+### Notes
+
+- gameplay state now streams over WebSockets on the same port as the HTTP server
+- if a browser cannot get live WebSocket state yet, the client falls back to HTTP session/sync requests so the match still loads
+- if a player refreshes the same browser on the same device, the client will try to reconnect to the same ship automatically while that session still exists
+- it is intended for a local network, not internet deployment
+- the server keeps one active session at a time

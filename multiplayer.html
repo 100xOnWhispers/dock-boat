@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Battles LAN</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">LAN Multiplayer</p>
+          <h1>The Battles</h1>
+        </div>
+        <p id="objectiveText" class="objective">
+          Create a LAN lobby on this device or join one from another device on the same network.
+        </p>
+      </header>
+
+      <section class="stage-shell">
+        <div class="stage" id="stage">
+          <canvas id="game" width="1280" height="720" aria-label="The Battles LAN game area"></canvas>
+
+          <div class="overlay" id="menuOverlay">
+            <div class="overlay-card overlay-wide">
+              <p class="eyebrow">Local Server</p>
+              <h2 id="overlayTitle">LAN Match</h2>
+              <p id="overlayCopy">
+                One device runs the server, the host creates the lobby, and everyone else joins from the same local network.
+              </p>
+              <div id="menuContent" class="menu-content"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <article class="panel" id="sessionPanel"></article>
+        <article class="panel" id="statusPanel"></article>
+        <article class="panel" id="weaponPanel"></article>
+        <article class="panel log-panel" id="logPanel"></article>
+        <article class="panel controls-panel">
+          <h3>Controls</h3>
+          <p><code>W / S</code> or arrows throttle</p>
+          <p><code>A / D</code> or arrows steer</p>
+          <p><code>Q / E</code> fire port / starboard</p>
+          <p><code>Teal docks</code> refill ammo for any ship</p>
+          <p><a class="panel-link" href="/index.html">Single-player drill</a></p>
+        </article>
+        <article class="panel map-panel">
+          <div class="panel-heading">
+            <h3>Sea Chart</h3>
+            <p>Teal islands reload, orange markers are ships.</p>
+          </div>
+          <canvas id="minimap" width="240" height="160" aria-label="LAN sea chart"></canvas>
+        </article>
+      </section>
+    </main>
+
+    <script src="multiplayer.js"></script>
+  </body>
+</html>
