@@ -1,5 +1,7 @@
 # Web app Game
 
+> **This project is becoming Dock Boat**, a native game for Mac, iPhone and iPad. The web prototype described below, built as "The Battles", is the reference for that port. Start at [AGENTS.md](AGENTS.md).
+
 the game has two modes
 
 1) single player (local mode)
